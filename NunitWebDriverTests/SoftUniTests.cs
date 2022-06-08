@@ -62,5 +62,20 @@ namespace NunitWebDriverTests
             Assert.That(driver.FindElement(By.CssSelector("li")).Text, Is.EqualTo("Невалидно потребителско име или парола"));
             driver.Close();
         }
+        [Test]
+        public void Test_Search() 
+        {
+
+            driver.FindElement(By.CssSelector(".cell > .fa")).Click();
+            var searchBox = driver.FindElement(By.CssSelector(".container > form #search-input"));
+            searchBox.Click();
+            searchBox.SendKeys("QA");
+            searchBox.SendKeys(Keys.Enter);
+
+            var resultFild = driver.FindElement(By.CssSelector(".search-title")).Text;
+            var expectValue = "Резултати от търсене на “QA”";
+
+            Assert.That(resultFild, Is.EqualTo(expectValue));
+        }
     }
 }
