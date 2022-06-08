@@ -8,7 +8,7 @@ namespace NunitWebDriverTests
     {
         private WebDriver driver;
 
-        [SetUp]
+        [OneTimeSetUp]
         public void OpenBrowserNavigate()
         {  
             this.driver = new ChromeDriver();
@@ -16,8 +16,8 @@ namespace NunitWebDriverTests
             driver.Manage().Window.FullScreen();
         }
 
-        [TearDown]
-        public void SchutDown()
+        [OneTimeTearDown]
+        public void ShutDown()
         {
             driver.Quit();
         }
@@ -26,6 +26,7 @@ namespace NunitWebDriverTests
         [Test]
         public void Test_AssertMainPageTitle()
         {
+            
             //Act      
             string expectedTitile = "Обучение по програмиране - Софтуерен университет";
             
@@ -38,8 +39,8 @@ namespace NunitWebDriverTests
         public void Test_AssertPage_AboutUs()
         {
             //Act
-            var zaNasField =driver.FindElement(By.CssSelector("#header-nav > div.toggle-nav.toggle-holder > ul > li:nth-child(1) > a > span"));
-            zaNasField.Click();
+            var aboutUSElement = driver.FindElement(By.CssSelector("#header-nav > div.toggle-nav.toggle-holder > ul > li:nth-child(1) > a > span"));
+            aboutUSElement.Click();
             
             string expectedTitile = "За нас - Софтуерен университет";
 
