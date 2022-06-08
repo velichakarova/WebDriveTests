@@ -13,7 +13,7 @@ namespace NunitWebDriverTests
         {  
             this.driver = new ChromeDriver();
             driver.Url = "http://softuni.bg";
-            driver.Manage().Window.FullScreen();
+            driver.Manage().Window.Maximize();
         }
 
         [OneTimeTearDown]
@@ -47,6 +47,20 @@ namespace NunitWebDriverTests
             //Assert
             Assert.That(driver.Title, Is.EqualTo(expectedTitile));
 
+        }
+
+        [Test]
+        public void TestLogin_InvalidUsernameAndPassword()
+        {
+            
+            driver.FindElement(By.CssSelector(".softuni-btn-primary")).Click();
+            driver.FindElement(By.Id("username")).Click();
+            driver.FindElement(By.Id("username")).SendKeys("user1");
+            driver.FindElement(By.Id("password-input")).Click();
+            driver.FindElement(By.Id("password-input")).SendKeys("123");
+            driver.FindElement(By.CssSelector(".softuni-btn")).Click();
+            Assert.That(driver.FindElement(By.CssSelector("li")).Text, Is.EqualTo("Невалидно потребителско име или парола"));
+            driver.Close();
         }
     }
 }
